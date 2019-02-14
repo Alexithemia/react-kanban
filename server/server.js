@@ -4,41 +4,35 @@ const passport = require('passport');
 const bcrypt = require('bcryptjs');
 const LocalStrategy = require('passport-local');
 const bodyParser = require('body-parser');
-const methodOverride = require('method-override');
 const kanban = require('./routes/kanban');
-const knex = require('./database/knex');
 const redis = require('connect-redis')(session);
 
 const User = require('./database/models/User');
 const app = express();
-const PORT = process.env.PORT || 8080;
-const ENV = process.env.NODE_ENV || 'development';
-const SESSION_SECRET = process.env.SESSION_SECRET || 'keyboard cat';
+const PORT = process.env.SERVER_PORT;
+const ENV = process.env.NODE_ENV;
+const SESSION_SECRET = process.env.SESSION_SECRET;
+const REDIS_URI = process.env.REDIS_HOST + ':' + process.env.REDIS_HOST_PORT;
 const saltRounds = 12;
 
 app.use(express.static('./public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({
-  store: new redis({ url: 'redis://redis-server:6379', logErrors: true }),
+  store: new redis({ url: REDIS_URI, logErrors: true }),
   secret: SESSION_SECRET,
   resave: false,
   saveUninitialized: false
 }));
 
-app.use(methodOverride('_method'));
-
-// PASSPORT STUFFFFFFFFFF
 app.use(passport.initialize());
 app.use(passport.session());
 
-// after login
 passport.serializeUser((user, done) => {
   return done(null, {
     id: user.id
   });
 });
 
-// after every request
 passport.deserializeUser((user, done) => {
   new User({ id: user.id }).fetch()
     .then(dbUser => {
@@ -79,10 +73,6 @@ passport.use(new LocalStrategy(function (username, password, done) {
     });
 }));
 
-app.get('/register', function (req, res) {
-  res.render('auth/register');
-});
-
 app.post('/register', (req, res) => {
   bcrypt.genSalt(saltRounds, (err, salt) => {
     if (err) { console.log(err); }
@@ -90,34 +80,36 @@ app.post('/register', (req, res) => {
       if (err) { console.log(err); }
       return new User({
         username: req.body.username,
-        password: hash
+        password: hash,
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        email: req.body.email
       })
         .save()
         .then((user) => {
-          res.redirect('/login');
+          res.json({ success: true });
         })
         .catch((err) => {
           console.log(err);
-          return res.send('Error Creating account');
+          return res.status(500).json({ success: false, error: err });
         });
     });
   });
 });
 
-app.get('/login', function (req, res) {
+app.post('/login', passport.authenticate('local'), function (req, res) {
+  res.json({ success: true });
 });
-
-app.post('/login', passport.authenticate('local', {
-}));
 
 app.get('/logout', isAuthenticated, (req, res) => {
   req.logout();
+  res.json({ success: true });
 });
 
 function isAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { next(); }
   else {
-    { next(); };
+    res.status(401).json({ success: false, error: 'not authenticated' });
   };
 };
 
