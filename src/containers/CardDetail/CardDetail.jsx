@@ -31,19 +31,24 @@ class CardDetail extends Component {
   statusClick = () => {
     const { id, status_id } = this.props.card;
 
-    if (status_id === '1') {
-      this.props.onUpdateStatus({
-        id,
-        status_id: '2'
-      });
-      this.props.closeCard();
-    } else if (status_id === '2') {
-      this.props.onUpdateStatus({
-        id,
-        status_id: '3'
-      });
-      this.props.closeCard();
-    };
+    switch (status_id) {
+      case '1':
+        this.props.onUpdateStatus({
+          id,
+          status_id: '2'
+        });
+        this.props.closeCard();
+        break;
+      case '2':
+        this.props.onUpdateStatus({
+          id,
+          status_id: '3'
+        });
+        this.props.closeCard();
+        break;
+      default:
+        break;
+    }
   };
 
 

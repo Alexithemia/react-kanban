@@ -48,38 +48,31 @@ const cardReducer = (state = initialState, action) => {
     case ADD_CARD:
       action.payload.id = payloadId++;
       return Object.assign({}, state, { selectedCard: action.payload, cards: [...state.cards, action.payload] });
+
     case SELECT_CARD:
       return Object.assign({}, state, { selectedCard: action.payload });
+
     case DELETE_CARD:
-      let deleteState = [];
-      state.cards.map(card => {
-        if (!(card.id === action.payload.id)) {
-          deleteState.push(card);
-        }
-        return {};
+      let deleteState = state.cards.filter((card) => {
+        return card.id !== action.payload.id;
       });
       return Object.assign({}, state, { cards: deleteState });
+
     case EDIT_CARD:
-      let editState = [];
-      state.cards.map(card => {
-        if (!(card.id === action.payload.id)) {
-          editState.push(card);
-        }
-        return {};
+      let editState = state.cards.filter((card) => {
+        return card.id !== action.payload.id;
       });
       editState.push(action.payload);
       return Object.assign({}, state, { cards: editState });
+
     case STATUS_CARD:
-      let statusState = [];
-      state.cards.map(card => {
+      state.cards.forEach(card => {
         if (card.id === action.payload.id) {
           card.status_id = action.payload.status_id;
         }
-        statusState.push(card);
-        return {};
       });
+      return Object.assign({}, state, { cards: state.cards });
 
-      return Object.assign({}, state, { cards: statusState });
     default:
       return state;
   };
