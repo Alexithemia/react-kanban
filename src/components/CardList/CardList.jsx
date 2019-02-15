@@ -11,9 +11,9 @@ const CardList = (props) => {
         priority_id={card.priority_id}
         status_id={card.status_id}
         created_by={card.created_by}
-        created_by_user={card.created_by_user}
+        createdByUser={card.createdByUser.first_name + ' ' + card.createdByUser.last_name}
         assigned_to={card.assigned_to}
-        assigned_to_user={card.assigned_to_user}
+        assignedUser={card.assignedUser.first_name + ' ' + card.assignedUser.last_name}
         showCard={props.showCard}
       />
     );

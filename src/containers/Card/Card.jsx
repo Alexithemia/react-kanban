@@ -11,7 +11,7 @@ class Card extends Component {
   }
 
   handleClick() {
-    const { id, title, body, priority_id, status_id, created_by, assigned_to } = this.props;
+    const { id, title, body, priority_id, status_id, created_by, assigned_to, assignedUser, createdByUser } = this.props;
 
     this.props.onSelect({
       id,
@@ -20,19 +20,21 @@ class Card extends Component {
       priority_id,
       status_id,
       created_by,
-      assigned_to
+      assigned_to,
+      assignedUser,
+      createdByUser
     });
 
     this.props.showCard();
   }
 
   render() {
-    const { title, priority_id, assigned_to_user } = this.props;
+    const { title, priority_id, assignedUser } = this.props;
     const classPriority = `card priority${priority_id}`
     return (
       <div className={classPriority} data-priority={priority_id} onClick={this.handleClick}>
         <div>{title}</div>
-        <div>{assigned_to_user}</div>
+        <div>{assignedUser}</div>
       </div>
     );
   }

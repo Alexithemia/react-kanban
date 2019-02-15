@@ -38,3 +38,20 @@ export function updateStatus(cardData) {
     payload: cardData
   };
 };
+
+// export const loadStart = () => {
+//   return (dispatch) => {
+//     return fetch('/kanban')
+//       .then((response) => {
+//         return response.json();
+//       })
+//       .then((state) => {
+//         console.log(state);
+
+//         // return dispatch({
+//         //   type: LOAD_BOOKS,
+//         //   payload: books
+//         // })
+//       })
+//   }
+// }

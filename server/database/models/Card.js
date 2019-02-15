@@ -1,4 +1,7 @@
 const bookshelf = require('./bookshelf');
+const User = require('./User');
+const Status = require('./Status');
+const Priority = require('./Priority');
 
 let Card = bookshelf.Model.extend({
   tableName: 'cards',
@@ -13,7 +16,7 @@ let Card = bookshelf.Model.extend({
     return this.belongsTo(Status);
   },
   priority: function () {
-    return this.belongsTo(User);
+    return this.belongsTo(Priority);
   },
 });
 

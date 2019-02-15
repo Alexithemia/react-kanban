@@ -11,7 +11,17 @@ const initialState = {
       priority_id: '3',
       status_id: '1',
       created_by: '4',
-      assigned_to: '4'
+      assigned_to: '4',
+      "assignedUser": {
+        "id": 4,
+        "first_name": "Jenny",
+        "last_name": "Doe"
+      },
+      "createdByUser": {
+        "id": 4,
+        "first_name": "guy1",
+        "last_name": "Doe"
+      }
     },
     {
       id: 2,
@@ -20,7 +30,17 @@ const initialState = {
       priority_id: '2',
       status_id: '1',
       created_by: '1',
-      assigned_to: '3'
+      assigned_to: '3',
+      "assignedUser": {
+        "id": 3,
+        "first_name": "Jimmy",
+        "last_name": "Doe"
+      },
+      "createdByUser": {
+        "id": 1,
+        "first_name": "John",
+        "last_name": "Doe"
+      }
     },
     {
       id: 3,
@@ -29,7 +49,17 @@ const initialState = {
       priority_id: '2',
       status_id: '2',
       created_by: '2',
-      assigned_to: '1'
+      assigned_to: '1',
+      "assignedUser": {
+        "id": 1,
+        "first_name": "John",
+        "last_name": "Doe"
+      },
+      "createdByUser": {
+        "id": 2,
+        "first_name": "Jane",
+        "last_name": "Doe"
+      }
     },
     {
       id: 4,
@@ -38,7 +68,17 @@ const initialState = {
       priority_id: '3',
       status_id: '3',
       created_by: '1',
-      assigned_to: '2'
+      assigned_to: '2',
+      "assignedUser": {
+        "id": 2,
+        "first_name": "Jane",
+        "last_name": "Doe"
+      },
+      "createdByUser": {
+        "id": 1,
+        "first_name": "John",
+        "last_name": "Doe"
+      }
     }
   ],
   users: [

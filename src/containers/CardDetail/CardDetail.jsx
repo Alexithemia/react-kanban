@@ -48,7 +48,7 @@ class CardDetail extends Component {
 
 
   render() {
-    const { title, body, priority_id, status_id, created_by, assigned_to } = this.props.card;
+    const { title, body, priority_id, status_id, createdByUser, assignedUser } = this.props.card;
     const classDetail = `cardDetail priority${priority_id}`
     const statusDetail = `status status${status_id}`
     return (
@@ -56,8 +56,8 @@ class CardDetail extends Component {
         <div className={statusDetail} onClick={this.statusClick}></div>
         <div className="title">{title}</div>
         <div className="body">{body}</div>
-        <div className="assigned">Assigned to: {assigned_to}</div>
-        <div className="created">Created By: {created_by}</div>
+        <div className="assigned">Assigned to: {assignedUser}</div>
+        <div className="created">Created By: {createdByUser}</div>
         <div className="optionBox">
           <div className="option" onClick={this.deleteClick}>Delete</div>
           <div className="option" onClick={this.props.showEdit}>Edit</div>

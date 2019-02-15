@@ -1,4 +1,5 @@
 const bookshelf = require('./bookshelf');
+const Card = require('./Card');
 
 let Priority = bookshelf.Model.extend({
   tableName: 'priorities',
