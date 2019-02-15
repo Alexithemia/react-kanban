@@ -1,19 +1,9 @@
 import React, { Component } from 'react';
 import './CardDetail.scss';
 import { connect } from 'react-redux';
-import { addCard } from '../../actions';
+import { deleteCard, updateStatus } from '../../actions';
 
 class CardDetail extends Component {
-  constructor(props) {
-    super(props);
-
-    // this.handleTitleOnChange = this.handleTitleOnChange.bind(this);
-    // this.handleBodyOnChange = this.handleBodyOnChange.bind(this);
-    // this.handlePriorityOnChange = this.handlePriorityOnChange.bind(this);
-    // this.handleAssignedOnChange = this.handleAssignedOnChange.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
-  };
-
   componentWillMount() {
     document.addEventListener('mousedown', this.handleClick, false);
   };
@@ -22,53 +12,6 @@ class CardDetail extends Component {
     document.removeEventListener('mousedown', this.handleClick, false);
   };
 
-  // handleTitleOnChange(e) {
-  //   const value = e.target.value;
-  //   this.setState({ title: value });
-  // };
-
-  // handleBodyOnChange(e) {
-  //   const value = e.target.value;
-  //   this.setState({ body: value });
-  // };
-
-  // handlePriorityOnChange(e) {
-  //   const value = e.target.value;
-  //   this.setState({ priority_id: value });
-  // };
-
-  // handleAssignedOnChange(e) {
-  //   const value = e.target.value;
-  //   this.setState({ assigned_to: value });
-  // };
-
-  // handleSubmit(e) {
-  //   e.preventDefault();
-  //   const { id, title, body, priority_id, status_id, created_by, assigned_to } = this.state;
-
-  //   this.props.onAdd({
-  //     id,
-  //     title,
-  //     body,
-  //     priority_id,
-  //     status_id,
-  //     created_by,
-  //     assigned_to
-  //   });
-
-  //   this.setState({
-  //     id: '0',
-  //     title: '',
-  //     body: '',
-  //     priority_id: '4',
-  //     status_id: '1',
-  //     created_by: '0',
-  //     assigned_to: '0'
-  //   });
-
-  //   this.props.show();
-  // };
-
   handleClick = (e) => {
     if (this.node.contains(e.target)) {
       return;
@@ -76,12 +19,55 @@ class CardDetail extends Component {
     this.props.closeCard();
   };
 
+  deleteClick = () => {
+    const { id } = this.props.card;
+
+    this.props.onDelete({
+      id
+    });
+    this.props.closeCard();
+  }
+
+  statusClick = () => {
+    const { id, status_id } = this.props.card;
+
+    switch (status_id) {
+      case '1':
+        this.props.onUpdateStatus({
+          id,
+          status_id: '2'
+        });
+        this.props.closeCard();
+        break;
+      case '2':
+        this.props.onUpdateStatus({
+          id,
+          status_id: '3'
+        });
+        this.props.closeCard();
+        break;
+      default:
+        break;
+    }
+  };
+
+
   render() {
+    const { title, body, priority_id, status_id, created_by, assigned_to } = this.props.card;
+    const classDetail = `cardDetail priority${priority_id}`
+    const statusDetail = `status status${status_id}`
     return (
-      <div ref={node => this.node = node}>
-        <div className="cardDetail">
-          HELLO!
+      <div className={classDetail} ref={node => this.node = node}>
+        <div className={statusDetail} onClick={this.statusClick}></div>
+        <div className="title">{title}</div>
+        <div className="body">{body}</div>
+        <div className="assigned">Assigned to: {assigned_to}</div>
+        <div className="created">Created By: {created_by}</div>
+        <div className="optionBox">
+          <div className="option" onClick={this.deleteClick}>Delete</div>
+          <div className="option" onClick={this.props.showEdit}>Edit</div>
         </div>
+
       </div>
     );
   };
@@ -92,8 +78,11 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAdd: (card) => {
-      dispatch(addCard(card));
+    onDelete: (cardId) => {
+      dispatch(deleteCard(cardId));
+    },
+    onUpdateStatus: (status) => {
+      dispatch(updateStatus(status));
     }
   };
 };
