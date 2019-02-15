@@ -10,8 +10,8 @@ const initialState = {
       body: 'Need cookies for party, make chocolate chip',
       priority_id: '3',
       status_id: '1',
-      created_by: '0',
-      assigned_to: '0'
+      created_by: '4',
+      assigned_to: '4'
     },
     {
       id: 2,
@@ -19,8 +19,8 @@ const initialState = {
       body: 'Need 10 pizza to feed everyone at the party',
       priority_id: '2',
       status_id: '1',
-      created_by: '0',
-      assigned_to: '1'
+      created_by: '1',
+      assigned_to: '3'
     },
     {
       id: 3,
@@ -28,8 +28,8 @@ const initialState = {
       body: 'Dont want guests seeing a dirty house',
       priority_id: '2',
       status_id: '2',
-      created_by: '0',
-      assigned_to: '0'
+      created_by: '2',
+      assigned_to: '1'
     },
     {
       id: 4,
@@ -37,10 +37,32 @@ const initialState = {
       body: 'Select games to play with everyone and check they work',
       priority_id: '3',
       status_id: '3',
-      created_by: '0',
-      assigned_to: '1'
+      created_by: '1',
+      assigned_to: '2'
     }
   ],
+  users: [
+    {
+      id: 1,
+      first_name: 'John',
+      last_name: 'Doe'
+    },
+    {
+      id: 2,
+      first_name: 'Jane',
+      last_name: 'Doe'
+    },
+    {
+      id: 3,
+      first_name: 'Jimmy',
+      last_name: 'Doe'
+    },
+    {
+      id: 4,
+      first_name: 'Jenny',
+      last_name: 'Doe'
+    },
+  ]
 }
 
 const cardReducer = (state = initialState, action) => {
@@ -48,8 +70,10 @@ const cardReducer = (state = initialState, action) => {
     case ADD_CARD:
       action.payload.id = payloadId++;
       return Object.assign({}, state, { selectedCard: action.payload, cards: [...state.cards, action.payload] });
+
     case SELECT_CARD:
       return Object.assign({}, state, { selectedCard: action.payload });
+
     case DELETE_CARD:
       let deleteState = [];
       state.cards.map(card => {
@@ -59,6 +83,7 @@ const cardReducer = (state = initialState, action) => {
         return {};
       });
       return Object.assign({}, state, { cards: deleteState });
+
     case EDIT_CARD:
       let editState = [];
       state.cards.map(card => {
@@ -69,6 +94,7 @@ const cardReducer = (state = initialState, action) => {
       });
       editState.push(action.payload);
       return Object.assign({}, state, { cards: editState });
+
     case STATUS_CARD:
       let statusState = [];
       state.cards.map(card => {
@@ -78,8 +104,8 @@ const cardReducer = (state = initialState, action) => {
         statusState.push(card);
         return {};
       });
-
       return Object.assign({}, state, { cards: statusState });
+
     default:
       return state;
   };

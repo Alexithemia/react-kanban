@@ -27,12 +27,12 @@ class Card extends Component {
   }
 
   render() {
-    const { title, priority_id, assigned_to } = this.props;
+    const { title, priority_id, assigned_to_user } = this.props;
     const classPriority = `card priority${priority_id}`
     return (
       <div className={classPriority} data-priority={priority_id} onClick={this.handleClick}>
         <div>{title}</div>
-        <div>{assigned_to}</div>
+        <div>{assigned_to_user}</div>
       </div>
     );
   }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './EditCard.scss';
 import { connect } from 'react-redux';
 import { editCard } from '../../actions';
+import UserList from '../../components/UserList'
 
 class EditCard extends Component {
   constructor(props) {
@@ -78,30 +79,28 @@ class EditCard extends Component {
 
   render() {
     return (
-      <div ref={node => this.node = node}>
-        <div className="editCard">
-          <h3>Edit Card</h3>
-          <form className="editForm">
-            Title:
+      <div className="editCard" ref={node => this.node = node}>
+        <h3>Edit Card</h3>
+        <form className="editForm">
+          Title:
           <input type="text" data-type="title" onChange={this.handleTitleOnChange} value={this.state.title} />
-            Body:
+          Body:
           <textarea data-type="body" onChange={this.handleBodyOnChange} value={this.state.body}></textarea>
-            Priority:
-          <select data-type="priority_id" onChange={this.handlePriorityOnChange}>
-              <option value="4">Low</option>
-              <option value="3">Medium</option>
-              <option value="2">High</option>
-              <option value="1">Blocker</option>
-            </select>
-            Assign to:
-          <select data-type="assigned_to" onChange={this.handleAssignOnChange}>
-              <option value="0">You</option>
-            </select>
-            <button onClick={this.handleSubmit}>
-              Save Card
+          Priority:
+          <select data-type="priority_id" onChange={this.handlePriorityOnChange} defaultValue={this.state.priority_id}>
+            <option value="4">Low</option>
+            <option value="3">Medium</option>
+            <option value="2">High</option>
+            <option value="1">Blocker</option>
+          </select>
+          Assign to:
+          <select data-type="assigned_to" onChange={this.handleAssignedOnChange} defaultValue={this.state.assigned_to}>
+            <UserList users={this.props.users} />
+          </select>
+          <button onClick={this.handleSubmit}>
+            Save Card
           </button>
-          </form>
-        </div>
+        </form>
       </div>
     );
   };

@@ -62,7 +62,6 @@ class CardDetail extends Component {
           <div className="option" onClick={this.deleteClick}>Delete</div>
           <div className="option" onClick={this.props.showEdit}>Edit</div>
         </div>
-
       </div>
     );
   };

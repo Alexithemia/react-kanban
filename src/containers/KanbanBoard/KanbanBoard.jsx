@@ -78,11 +78,11 @@ class KanbanBoard extends Component {
 
           <StatusSection title='Completed' cards={completed} showCard={this.toggleDetail} />
 
-          {this.state.addFormOpen ? <AddCard close={this.closeForm} showCard={this.toggleDetail} /> : null}
+          {this.state.addFormOpen ? <AddCard users={this.props.users} close={this.closeForm} showCard={this.toggleDetail} /> : null}
 
           {this.state.detailOpen ? <CardDetail card={this.props.selectedCard} closeCard={this.closeDetail} showEdit={this.toggleEdit} /> : null}
 
-          {this.state.editFormOpen ? <EditCard card={this.props.selectedCard} closeEdit={this.closeEdit} /> : null}
+          {this.state.editFormOpen ? <EditCard users={this.props.users} card={this.props.selectedCard} closeEdit={this.closeEdit} /> : null}
 
         </div>
       </>
@@ -93,7 +93,8 @@ class KanbanBoard extends Component {
 const mapStateToProps = (state) => {
   return {
     cards: state.cards,
-    selectedCard: state.selectedCard
+    selectedCard: state.selectedCard,
+    users: state.users
   };
 };
 
