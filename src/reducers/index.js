@@ -70,7 +70,6 @@ const cardReducer = (state = initialState, action) => {
       editState.push(action.payload);
       return Object.assign({}, state, { cards: editState });
     case STATUS_CARD:
-      console.log(action.payload);
       let statusState = [];
       state.cards.map(card => {
         if (card.id === action.payload.id) {
