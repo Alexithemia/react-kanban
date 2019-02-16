@@ -6,6 +6,8 @@ import AddCard from '../AddCard';
 import Header from '../../components/Header';
 import CardDetail from '../CardDetail';
 import EditCard from '../EditCard';
+import Login from '../Login';
+import Register from '../Register';
 
 class KanbanBoard extends Component {
   state = {
@@ -82,6 +84,10 @@ class KanbanBoard extends Component {
           {this.state.detailOpen ? <CardDetail card={this.props.selectedCard} closeCard={this.closeDetail} showEdit={this.toggleEdit} /> : null}
 
           {this.state.editFormOpen ? <EditCard users={this.props.users} card={this.props.selectedCard} closeEdit={this.closeEdit} /> : null}
+
+          {this.state.loginOpen ? <Login closeLogin={this.closeLogin} /> : null}
+
+          {this.state.registerOpen ? <Register closeRegister={this.closeRegister} /> : null}
 
         </div>
       </>
