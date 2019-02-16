@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './AddCard.scss';
 import { connect } from 'react-redux';
-import { addCard, loadUsers } from '../../actions';
+import { addCard } from '../../actions';
 import UserList from '../../components/UserList'
 
 class AddCard extends Component {
@@ -26,7 +26,6 @@ class AddCard extends Component {
 
   componentWillMount() {
     document.addEventListener('mousedown', this.handleClick, false);
-    return this.props.loadUsers();
   };
 
   componentWillUnmount() {
@@ -66,7 +65,6 @@ class AddCard extends Component {
       assigned_to
     });
 
-    this.props.showCard();
     this.props.close();
   };
 
@@ -113,9 +111,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onAdd: (card) => {
       dispatch(addCard(card));
-    },
-    loadUsers: () => {
-      return dispatch(loadUsers())
     }
   };
 };

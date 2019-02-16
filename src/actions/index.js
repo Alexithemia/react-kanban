@@ -3,7 +3,7 @@ export const SELECT_CARD = 'SELECT_CARD';
 export const DELETE_CARD = 'DELETE_CARD';
 export const EDIT_CARD = 'EDIT_CARD';
 export const STATUS_CARD = 'STATUS_CARD';
-export const LOAD_START = 'LOAD_START';
+export const LOAD_CARDS = 'LOAD_CARDS';
 export const LOAD_USERS = 'LOAD_USERS';
 
 export function addCard(newCard) {
@@ -72,15 +72,7 @@ export function editCard(cardData) {
   }
 };
 
-export function updateStatus(cardData) {
-  return {
-    type: STATUS_CARD,
-    payload: cardData
-  };
-};
-
-
-export const loadStart = () => {
+export const loadCards = () => {
   return (dispatch) => {
     return fetch('/kanban/cards')
       .then((response) => {
@@ -88,7 +80,7 @@ export const loadStart = () => {
       })
       .then((state) => {
         return dispatch({
-          type: LOAD_START,
+          type: LOAD_CARDS,
           payload: state
         })
       })

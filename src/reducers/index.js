@@ -1,4 +1,4 @@
-import { ADD_CARD, SELECT_CARD, DELETE_CARD, EDIT_CARD, STATUS_CARD, LOAD_START, LOAD_USERS } from '../actions';
+import { ADD_CARD, SELECT_CARD, DELETE_CARD, EDIT_CARD, STATUS_CARD, LOAD_CARDS, LOAD_USERS } from '../actions';
 
 const initialState = {
   cards: [],
@@ -33,7 +33,7 @@ const cardReducer = (state = initialState, action) => {
         }
       });
       return Object.assign({}, state, { cards: state.cards });
-    case LOAD_START:
+    case LOAD_CARDS:
       return Object.assign({}, state, action.payload);
     case LOAD_USERS:
       return Object.assign({}, state, { users: action.payload.users });

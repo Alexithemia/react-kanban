@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './EditCard.scss';
 import { connect } from 'react-redux';
-import { editCard, loadUsers } from '../../actions';
+import { editCard } from '../../actions';
 import UserList from '../../components/UserList'
 
 class EditCard extends Component {
@@ -27,7 +27,6 @@ class EditCard extends Component {
 
   componentWillMount() {
     document.addEventListener('mousedown', this.handleClick, false);
-    return this.props.loadUsers();
   };
 
   componentWillUnmount() {
@@ -114,9 +113,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onEdit: (cardData) => {
       dispatch(editCard(cardData));
-    },
-    loadUsers: () => {
-      return dispatch(loadUsers())
     }
   };
 };

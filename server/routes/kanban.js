@@ -12,8 +12,6 @@ function isAuthenticated(req, res, next) {
 
 router.route('/')
   .post(function (req, res) { //make card
-    console.log(req.body);
-
     Card.forge({
       title: req.body.title,
       body: req.body.body,
