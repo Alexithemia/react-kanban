@@ -16,7 +16,7 @@ const REDIS_URI = process.env.REDIS_HOST + ':' + process.env.REDIS_HOST_PORT;
 const saltRounds = 12;
 
 app.use(express.static('./public'));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(session({
   store: new redis({ url: REDIS_URI, logErrors: true }),
   secret: SESSION_SECRET,

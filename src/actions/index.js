@@ -3,12 +3,28 @@ export const SELECT_CARD = 'SELECT_CARD';
 export const DELETE_CARD = 'DELETE_CARD';
 export const EDIT_CARD = 'EDIT_CARD';
 export const STATUS_CARD = 'STATUS_CARD';
+export const LOAD_CARDS = 'LOAD_CARDS';
+export const LOAD_USERS = 'LOAD_USERS';
 
 export function addCard(newCard) {
-  return {
-    type: ADD_CARD,
-    payload: newCard
-  };
+  return (dispatch) => {
+    return fetch('/kanban', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newCard)
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseCard) => {
+        return dispatch({
+          type: ADD_CARD,
+          payload: responseCard
+        });
+      })
+  }
 };
 
 export function selectCard(cardData) {
@@ -19,22 +35,69 @@ export function selectCard(cardData) {
 };
 
 export function deleteCard(cardId) {
-  return {
-    type: DELETE_CARD,
-    payload: cardId
-  };
+  return (dispatch) => {
+    return fetch(`/kanban/${cardId.id}`, {
+      method: 'DELETE',
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then(() => {
+        return dispatch({
+          type: DELETE_CARD,
+          payload: cardId
+        });
+      })
+  }
 };
 
 export function editCard(cardData) {
-  return {
-    type: EDIT_CARD,
-    payload: cardData
-  };
+  return (dispatch) => {
+    return fetch(`/kanban/${cardData.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(cardData)
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseCard) => {
+        return dispatch({
+          type: EDIT_CARD,
+          payload: responseCard
+        });
+      })
+  }
 };
 
-export function updateStatus(cardData) {
-  return {
-    type: STATUS_CARD,
-    payload: cardData
-  };
-};
+export const loadCards = () => {
+  return (dispatch) => {
+    return fetch('/kanban/cards')
+      .then((response) => {
+        return response.json();
+      })
+      .then((state) => {
+        return dispatch({
+          type: LOAD_CARDS,
+          payload: state
+        })
+      })
+  }
+}
+
+export const loadUsers = () => {
+  return (dispatch) => {
+    return fetch('/kanban/users')
+      .then((response) => {
+        return response.json();
+      })
+      .then((users) => {
+        return dispatch({
+          type: LOAD_USERS,
+          payload: users
+        })
+      })
+  }
+}

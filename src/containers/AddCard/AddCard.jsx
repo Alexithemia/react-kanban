@@ -2,19 +2,19 @@ import React, { Component } from 'react';
 import './AddCard.scss';
 import { connect } from 'react-redux';
 import { addCard } from '../../actions';
+import UserList from '../../components/UserList'
 
 class AddCard extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      id: 0,
       title: '',
       body: '',
-      priority_id: '4',
-      status_id: '1',
-      created_by: '0',
-      assigned_to: '0'
+      priority_id: 4,
+      status_id: 1,
+      created_by: 1,
+      assigned_to: 1
     };
 
     this.handleTitleOnChange = this.handleTitleOnChange.bind(this);
@@ -54,10 +54,9 @@ class AddCard extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const { id, title, body, priority_id, status_id, created_by, assigned_to } = this.state;
+    const { title, body, priority_id, status_id, created_by, assigned_to } = this.state;
 
     this.props.onAdd({
-      id,
       title,
       body,
       priority_id,
@@ -66,16 +65,6 @@ class AddCard extends Component {
       assigned_to
     });
 
-    this.setState({
-      id: '0',
-      title: '',
-      body: '',
-      priority_id: '4',
-      status_id: '1',
-      created_by: '0',
-      assigned_to: '0'
-    });
-    this.props.showCard();
     this.props.close();
   };
 
@@ -88,30 +77,28 @@ class AddCard extends Component {
 
   render() {
     return (
-      <div ref={node => this.node = node}>
-        <div className='addCard'>
-          <h3>Add Card</h3>
-          <form className='addForm'>
-            Title:
+      <div className='addCard' ref={node => this.node = node}>
+        <h3>Add Card</h3>
+        <form className='addForm'>
+          Title:
           <input type="text" data-type="title" onChange={this.handleTitleOnChange} value={this.state.title} />
-            Body:
+          Body:
           <textarea data-type="body" onChange={this.handleBodyOnChange} value={this.state.body}></textarea>
-            Priority:
+          Priority:
           <select data-type="priority_id" onChange={this.handlePriorityOnChange}>
-              <option value="4">Low</option>
-              <option value="3">Medium</option>
-              <option value="2">High</option>
-              <option value="1">Blocker</option>
-            </select>
-            Assign to:
-          <select data-type="assigned_to" onChange={this.handleAssignOnChange}>
-              <option value="0">You</option>
-            </select>
-            <button onClick={this.handleSubmit}>
-              Save Card
+            <option value={4}>Low</option>
+            <option value={3}>Medium</option>
+            <option value={2}>High</option>
+            <option value={1}>Blocker</option>
+          </select>
+          Assign to:
+          <select data-type="assigned_to" onChange={this.handleAssignedOnChange} defaultValue={this.state.assigned_to}>
+            <UserList users={this.props.users} />
+          </select>
+          <button onClick={this.handleSubmit}>
+            Save Card
           </button>
-          </form>
-        </div>
+        </form>
       </div>
     );
   };

@@ -11,7 +11,9 @@ const CardList = (props) => {
         priority_id={card.priority_id}
         status_id={card.status_id}
         created_by={card.created_by}
+        createdByUser={card.createdByUser.first_name + ' ' + card.createdByUser.last_name}
         assigned_to={card.assigned_to}
+        assignedUser={card.assignedUser.first_name + ' ' + card.assignedUser.last_name}
         showCard={props.showCard}
       />
     );
@@ -21,7 +23,7 @@ const CardList = (props) => {
     <>
       {cardList}
     </>
-  )
-}
+  );
+};
 
 export default CardList;

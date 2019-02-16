@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './CardDetail.scss';
 import { connect } from 'react-redux';
-import { deleteCard, updateStatus } from '../../actions';
+import { deleteCard, editCard } from '../../actions';
 
 class CardDetail extends Component {
   componentWillMount() {
@@ -29,20 +29,29 @@ class CardDetail extends Component {
   }
 
   statusClick = () => {
-    const { id, status_id } = this.props.card;
-
+    const { id, title, body, priority_id, status_id, created_by, assigned_to } = this.props.card;
     switch (status_id) {
-      case '1':
+      case 1:
         this.props.onUpdateStatus({
           id,
-          status_id: '2'
+          title,
+          body,
+          priority_id,
+          status_id: 2,
+          created_by,
+          assigned_to
         });
         this.props.closeCard();
         break;
-      case '2':
+      case 2:
         this.props.onUpdateStatus({
           id,
-          status_id: '3'
+          title,
+          body,
+          priority_id,
+          status_id: 3,
+          created_by,
+          assigned_to
         });
         this.props.closeCard();
         break;
@@ -53,7 +62,7 @@ class CardDetail extends Component {
 
 
   render() {
-    const { title, body, priority_id, status_id, created_by, assigned_to } = this.props.card;
+    const { title, body, priority_id, status_id, createdByUser, assignedUser } = this.props.card;
     const classDetail = `cardDetail priority${priority_id}`
     const statusDetail = `status status${status_id}`
     return (
@@ -61,13 +70,12 @@ class CardDetail extends Component {
         <div className={statusDetail} onClick={this.statusClick}></div>
         <div className="title">{title}</div>
         <div className="body">{body}</div>
-        <div className="assigned">Assigned to: {assigned_to}</div>
-        <div className="created">Created By: {created_by}</div>
+        <div className="assigned">Assigned to: {assignedUser}</div>
+        <div className="created">Created By: {createdByUser}</div>
         <div className="optionBox">
           <div className="option" onClick={this.deleteClick}>Delete</div>
           <div className="option" onClick={this.props.showEdit}>Edit</div>
         </div>
-
       </div>
     );
   };
@@ -82,7 +90,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(deleteCard(cardId));
     },
     onUpdateStatus: (status) => {
-      dispatch(updateStatus(status));
+      dispatch(editCard(status));
     }
   };
 };
