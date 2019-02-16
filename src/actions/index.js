@@ -3,6 +3,7 @@ export const SELECT_CARD = 'SELECT_CARD';
 export const DELETE_CARD = 'DELETE_CARD';
 export const EDIT_CARD = 'EDIT_CARD';
 export const STATUS_CARD = 'STATUS_CARD';
+export const LOAD_START = 'LOAD_START';
 
 export function addCard(newCard) {
   return {
@@ -39,19 +40,17 @@ export function updateStatus(cardData) {
   };
 };
 
-// export const loadStart = () => {
-//   return (dispatch) => {
-//     return fetch('/kanban')
-//       .then((response) => {
-//         return response.json();
-//       })
-//       .then((state) => {
-//         console.log(state);
-
-//         // return dispatch({
-//         //   type: LOAD_BOOKS,
-//         //   payload: books
-//         // })
-//       })
-//   }
-// }
+export const loadStart = () => {
+  return (dispatch) => {
+    return fetch('/kanban')
+      .then((response) => {
+        return response.json();
+      })
+      .then((state) => {
+        return dispatch({
+          type: LOAD_START,
+          payload: state
+        })
+      })
+  }
+}

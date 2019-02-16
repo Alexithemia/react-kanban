@@ -1,4 +1,4 @@
-import { ADD_CARD, SELECT_CARD, DELETE_CARD, EDIT_CARD, STATUS_CARD } from '../actions';
+import { ADD_CARD, SELECT_CARD, DELETE_CARD, EDIT_CARD, STATUS_CARD, LOAD_START } from '../actions';
 
 let payloadId = 5;
 
@@ -145,7 +145,9 @@ const cardReducer = (state = initialState, action) => {
         return {};
       });
       return Object.assign({}, state, { cards: statusState });
-
+    case LOAD_START:
+      console.log(action.payload);
+      return state;
     default:
       return state;
   };
