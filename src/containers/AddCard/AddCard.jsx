@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './AddCard.scss';
 import { connect } from 'react-redux';
-import { addCard } from '../../actions';
+import { addCard, loadUsers } from '../../actions';
+import UserList from '../../components/UserList'
 
 class AddCard extends Component {
   constructor(props) {
@@ -11,10 +12,10 @@ class AddCard extends Component {
       id: 0,
       title: '',
       body: '',
-      priority_id: '4',
-      status_id: '1',
-      created_by: '0',
-      assigned_to: '0'
+      priority_id: 4,
+      status_id: 1,
+      created_by: 0,
+      assigned_to: 0
     };
 
     this.handleTitleOnChange = this.handleTitleOnChange.bind(this);
@@ -26,6 +27,7 @@ class AddCard extends Component {
 
   componentWillMount() {
     document.addEventListener('mousedown', this.handleClick, false);
+    return this.props.loadUsers();
   };
 
   componentWillUnmount() {
@@ -67,13 +69,13 @@ class AddCard extends Component {
     });
 
     this.setState({
-      id: '0',
+      id: 0,
       title: '',
       body: '',
-      priority_id: '4',
-      status_id: '1',
-      created_by: '0',
-      assigned_to: '0'
+      priority_id: 4,
+      status_id: 1,
+      created_by: 0,
+      assigned_to: 0
     });
     this.props.showCard();
     this.props.close();
@@ -97,14 +99,14 @@ class AddCard extends Component {
           <textarea data-type="body" onChange={this.handleBodyOnChange} value={this.state.body}></textarea>
           Priority:
           <select data-type="priority_id" onChange={this.handlePriorityOnChange}>
-            <option value="4">Low</option>
-            <option value="3">Medium</option>
-            <option value="2">High</option>
-            <option value="1">Blocker</option>
+            <option value={4}>Low</option>
+            <option value={3}>Medium</option>
+            <option value={2}>High</option>
+            <option value={1}>Blocker</option>
           </select>
           Assign to:
-          <select data-type="assigned_to" onChange={this.handleAssignOnChange}>
-            <option value="0">You</option>
+          <select data-type="assigned_to" onChange={this.handleAssignedOnChange} defaultValue={this.state.assigned_to}>
+            <UserList users={this.props.users} />
           </select>
           <button onClick={this.handleSubmit}>
             Save Card
@@ -122,6 +124,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onAdd: (card) => {
       dispatch(addCard(card));
+    },
+    loadUsers: () => {
+      return dispatch(loadUsers())
     }
   };
 };

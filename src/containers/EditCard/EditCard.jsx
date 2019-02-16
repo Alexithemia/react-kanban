@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './EditCard.scss';
 import { connect } from 'react-redux';
-import { editCard } from '../../actions';
+import { editCard, loadUsers } from '../../actions';
 import UserList from '../../components/UserList'
 
 class EditCard extends Component {
@@ -27,6 +27,7 @@ class EditCard extends Component {
 
   componentWillMount() {
     document.addEventListener('mousedown', this.handleClick, false);
+    return this.props.loadUsers();
   };
 
   componentWillUnmount() {
@@ -78,6 +79,8 @@ class EditCard extends Component {
   };
 
   render() {
+    console.log(this.state);
+
     return (
       <div className="editCard" ref={node => this.node = node}>
         <h3>Edit Card</h3>
@@ -88,10 +91,10 @@ class EditCard extends Component {
           <textarea data-type="body" onChange={this.handleBodyOnChange} value={this.state.body}></textarea>
           Priority:
           <select data-type="priority_id" onChange={this.handlePriorityOnChange} defaultValue={this.state.priority_id}>
-            <option value="4">Low</option>
-            <option value="3">Medium</option>
-            <option value="2">High</option>
-            <option value="1">Blocker</option>
+            <option value={4}>Low</option>
+            <option value={3}>Medium</option>
+            <option value={2}>High</option>
+            <option value={1}>Blocker</option>
           </select>
           Assign to:
           <select data-type="assigned_to" onChange={this.handleAssignedOnChange} defaultValue={this.state.assigned_to}>
@@ -113,6 +116,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onEdit: (cardData) => {
       dispatch(editCard(cardData));
+    },
+    loadUsers: () => {
+      return dispatch(loadUsers())
     }
   };
 };

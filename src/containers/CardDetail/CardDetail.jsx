@@ -30,19 +30,18 @@ class CardDetail extends Component {
 
   statusClick = () => {
     const { id, status_id } = this.props.card;
-
     switch (status_id) {
-      case '1':
+      case 1:
         this.props.onUpdateStatus({
           id,
-          status_id: '2'
+          status_id: 2
         });
         this.props.closeCard();
         break;
-      case '2':
+      case 2:
         this.props.onUpdateStatus({
           id,
-          status_id: '3'
+          status_id: 3
         });
         this.props.closeCard();
         break;

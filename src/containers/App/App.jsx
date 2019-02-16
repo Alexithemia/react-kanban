@@ -22,13 +22,8 @@ class App extends Component {
   };
 };
 
-const mapStateToProps = (state) => {
-  console.log(state);
-
-  return {
-    'cards': state.cards,
-    'users': state.users
-  };
+const mapStateToProps = () => {
+  return {};
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -43,6 +38,5 @@ App = connect(
   mapStateToProps,
   mapDispatchToProps
 )(App);
-
 
 export default App;

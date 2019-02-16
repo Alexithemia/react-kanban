@@ -1,108 +1,10 @@
-import { ADD_CARD, SELECT_CARD, DELETE_CARD, EDIT_CARD, STATUS_CARD, LOAD_START } from '../actions';
+import { ADD_CARD, SELECT_CARD, DELETE_CARD, EDIT_CARD, STATUS_CARD, LOAD_START, LOAD_USERS } from '../actions';
 
 let payloadId = 5;
 
 const initialState = {
-  cards: [
-    {
-      id: 1,
-      title: `Make Cookies`,
-      body: 'Need cookies for party, make chocolate chip',
-      priority_id: '3',
-      status_id: '1',
-      created_by: '4',
-      assigned_to: '4',
-      "assignedUser": {
-        "id": 4,
-        "first_name": "Jenny",
-        "last_name": "Doe"
-      },
-      "createdByUser": {
-        "id": 4,
-        "first_name": "guy1",
-        "last_name": "Doe"
-      }
-    },
-    {
-      id: 2,
-      title: `Buy Pizza`,
-      body: 'Need 10 pizza to feed everyone at the party',
-      priority_id: '2',
-      status_id: '1',
-      created_by: '1',
-      assigned_to: '3',
-      "assignedUser": {
-        "id": 3,
-        "first_name": "Jimmy",
-        "last_name": "Doe"
-      },
-      "createdByUser": {
-        "id": 1,
-        "first_name": "John",
-        "last_name": "Doe"
-      }
-    },
-    {
-      id: 3,
-      title: 'Clean House',
-      body: 'Dont want guests seeing a dirty house',
-      priority_id: '2',
-      status_id: '2',
-      created_by: '2',
-      assigned_to: '1',
-      "assignedUser": {
-        "id": 1,
-        "first_name": "John",
-        "last_name": "Doe"
-      },
-      "createdByUser": {
-        "id": 2,
-        "first_name": "Jane",
-        "last_name": "Doe"
-      }
-    },
-    {
-      id: 4,
-      title: 'Choose games',
-      body: 'Select games to play with everyone and check they work',
-      priority_id: '3',
-      status_id: '3',
-      created_by: '1',
-      assigned_to: '2',
-      "assignedUser": {
-        "id": 2,
-        "first_name": "Jane",
-        "last_name": "Doe"
-      },
-      "createdByUser": {
-        "id": 1,
-        "first_name": "John",
-        "last_name": "Doe"
-      }
-    }
-  ],
-  users: [
-    {
-      id: 1,
-      first_name: 'John',
-      last_name: 'Doe'
-    },
-    {
-      id: 2,
-      first_name: 'Jane',
-      last_name: 'Doe'
-    },
-    {
-      id: 3,
-      first_name: 'Jimmy',
-      last_name: 'Doe'
-    },
-    {
-      id: 4,
-      first_name: 'Jenny',
-      last_name: 'Doe'
-    },
-  ]
+  cards: [],
+  users: []
 }
 
 const cardReducer = (state = initialState, action) => {
@@ -133,15 +35,11 @@ const cardReducer = (state = initialState, action) => {
           card.status_id = action.payload.status_id;
         }
       });
-<<<<<<< HEAD
-      return Object.assign({}, state, { cards: statusState });
-    case LOAD_START:
-      console.log(action.payload);
-      return state;
-=======
       return Object.assign({}, state, { cards: state.cards });
-
->>>>>>> development
+    case LOAD_START:
+      return Object.assign({}, state, action.payload);
+    case LOAD_USERS:
+      return Object.assign({}, state, { users: action.payload.users });
     default:
       return state;
   };

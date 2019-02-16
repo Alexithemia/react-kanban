@@ -4,6 +4,7 @@ export const DELETE_CARD = 'DELETE_CARD';
 export const EDIT_CARD = 'EDIT_CARD';
 export const STATUS_CARD = 'STATUS_CARD';
 export const LOAD_START = 'LOAD_START';
+export const LOAD_USERS = 'LOAD_USERS';
 
 export function addCard(newCard) {
   return {
@@ -40,9 +41,10 @@ export function updateStatus(cardData) {
   };
 };
 
+
 export const loadStart = () => {
   return (dispatch) => {
-    return fetch('/kanban')
+    return fetch('/kanban/cards')
       .then((response) => {
         return response.json();
       })
@@ -50,6 +52,21 @@ export const loadStart = () => {
         return dispatch({
           type: LOAD_START,
           payload: state
+        })
+      })
+  }
+}
+
+export const loadUsers = () => {
+  return (dispatch) => {
+    return fetch('/kanban/users')
+      .then((response) => {
+        return response.json();
+      })
+      .then((users) => {
+        return dispatch({
+          type: LOAD_USERS,
+          payload: users
         })
       })
   }

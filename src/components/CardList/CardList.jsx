@@ -23,7 +23,7 @@ const CardList = (props) => {
     <>
       {cardList}
     </>
-  )
-}
+  );
+};
 
 export default CardList;

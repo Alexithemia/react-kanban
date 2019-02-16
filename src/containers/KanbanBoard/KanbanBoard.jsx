@@ -48,16 +48,15 @@ class KanbanBoard extends Component {
     let queue = [];
     let inProgress = [];
     let completed = [];
-
     this.props.cards.map((card) => {
       switch (card.status_id) {
-        case '1':
+        case 1:
           queue.push(card)
           break;
-        case '2':
+        case 2:
           inProgress.push(card)
           break;
-        case '3':
+        case 3:
           completed.push(card)
           break;
         default:
