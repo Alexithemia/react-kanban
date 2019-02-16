@@ -20,8 +20,6 @@ const cardReducer = (state = initialState, action) => {
       return Object.assign({}, state, { cards: deleteState });
 
     case EDIT_CARD:
-      console.log(action.payload);
-
       let editState = state.cards.filter((card) => {
         return card.id !== action.payload.id;
       });

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './CardDetail.scss';
 import { connect } from 'react-redux';
-import { deleteCard, updateStatus } from '../../actions';
+import { deleteCard, editCard } from '../../actions';
 
 class CardDetail extends Component {
   componentWillMount() {
@@ -29,19 +29,29 @@ class CardDetail extends Component {
   }
 
   statusClick = () => {
-    const { id, status_id } = this.props.card;
+    const { id, title, body, priority_id, status_id, created_by, assigned_to } = this.props.card;
     switch (status_id) {
       case 1:
         this.props.onUpdateStatus({
           id,
-          status_id: 2
+          title,
+          body,
+          priority_id,
+          status_id: 2,
+          created_by,
+          assigned_to
         });
         this.props.closeCard();
         break;
       case 2:
         this.props.onUpdateStatus({
           id,
-          status_id: 3
+          title,
+          body,
+          priority_id,
+          status_id: 3,
+          created_by,
+          assigned_to
         });
         this.props.closeCard();
         break;
@@ -80,7 +90,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(deleteCard(cardId));
     },
     onUpdateStatus: (status) => {
-      dispatch(updateStatus(status));
+      dispatch(editCard(status));
     }
   };
 };
