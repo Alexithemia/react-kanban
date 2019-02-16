@@ -79,8 +79,6 @@ class EditCard extends Component {
   };
 
   render() {
-    console.log(this.state);
-
     return (
       <div className="editCard" ref={node => this.node = node}>
         <h3>Edit Card</h3>

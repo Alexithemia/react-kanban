@@ -10,7 +10,6 @@ const initialState = {
 const cardReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_CARD:
-      action.payload.id = payloadId++;
       return Object.assign({}, state, { selectedCard: action.payload, cards: [...state.cards, action.payload] });
 
     case SELECT_CARD:

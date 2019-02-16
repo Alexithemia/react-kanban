@@ -7,10 +7,12 @@ export const LOAD_START = 'LOAD_START';
 export const LOAD_USERS = 'LOAD_USERS';
 
 export function addCard(newCard) {
-  return {
-    type: ADD_CARD,
-    payload: newCard
-  };
+  console.log(newCard);
+
+  // return {
+  //   type: ADD_CARD,
+  //   payload: newCard
+  // };
 };
 
 export function selectCard(cardData) {

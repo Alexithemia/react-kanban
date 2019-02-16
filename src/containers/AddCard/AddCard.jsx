@@ -9,7 +9,6 @@ class AddCard extends Component {
     super(props);
 
     this.state = {
-      id: 0,
       title: '',
       body: '',
       priority_id: 4,
@@ -56,10 +55,9 @@ class AddCard extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const { id, title, body, priority_id, status_id, created_by, assigned_to } = this.state;
+    const { title, body, priority_id, status_id, created_by, assigned_to } = this.state;
 
     this.props.onAdd({
-      id,
       title,
       body,
       priority_id,
@@ -69,7 +67,6 @@ class AddCard extends Component {
     });
 
     this.setState({
-      id: 0,
       title: '',
       body: '',
       priority_id: 4,
