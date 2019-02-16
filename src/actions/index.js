@@ -35,10 +35,20 @@ export function selectCard(cardData) {
 };
 
 export function deleteCard(cardId) {
-  return {
-    type: DELETE_CARD,
-    payload: cardId
-  };
+  return (dispatch) => {
+    return fetch(`/kanban/${cardId.id}`, {
+      method: 'DELETE',
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then(() => {
+        return dispatch({
+          type: DELETE_CARD,
+          payload: cardId
+        });
+      })
+  }
 };
 
 export function editCard(cardData) {

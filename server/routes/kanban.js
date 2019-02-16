@@ -99,7 +99,7 @@ router.route('/:id')
         res.status(500).json({ success: false, error: err });
       });
   })
-  .delete(isAuthenticated, function (req, res) { //delete card
+  .delete(function (req, res) { //delete card
     new Card({ id: req.params.id }).destroy()
       .then(function () {
         res.json({ success: true });
