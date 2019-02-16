@@ -3,21 +3,25 @@ const User = require('./User');
 const Status = require('./Status');
 const Priority = require('./Priority');
 
-let Card = bookshelf.Model.extend({
-  tableName: 'cards',
-  hasTimeStamps: true,
-  assignedUser: function () {
-    return this.belongsTo('User', 'assigned_to');
-  },
-  createdByUser: function () {
-    return this.belongsTo('User', 'created_by');
-  },
-  status: function () {
+class Card extends bookshelf.Model {
+  get tableName() { return 'cards'; }
+  get hasTimestamps() { return true }
+
+  assignedUser() {
+    return this.belongsTo('User', 'assigned_to', 'id');
+  }
+
+  createdByUser() {
+    return this.belongsTo('User', 'created_by', 'id');
+  }
+
+  status() {
     return this.belongsTo('Status');
-  },
-  priority: function () {
+  }
+
+  priority() {
     return this.belongsTo('Priority');
-  },
-});
+  }
+}
 
 module.exports = bookshelf.model('Card', Card);

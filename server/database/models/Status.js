@@ -1,11 +1,11 @@
 const bookshelf = require('./bookshelf');
 
-let Status = bookshelf.Model.extend({
-  tableName: 'statuses',
-  hasTimeStamps: true,
-  cards: function () {
+class Status extends bookshelf.Model {
+  get tableName() { return 'statuses' }
+  get hasTimeStamps() { return true }
+  cards() {
     return this.hasMany(Card);
   }
-});
+};
 
 module.exports = bookshelf.model('Status', Status);
