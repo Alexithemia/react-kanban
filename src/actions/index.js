@@ -7,12 +7,24 @@ export const LOAD_START = 'LOAD_START';
 export const LOAD_USERS = 'LOAD_USERS';
 
 export function addCard(newCard) {
-  console.log(newCard);
-
-  // return {
-  //   type: ADD_CARD,
-  //   payload: newCard
-  // };
+  return (dispatch) => {
+    return fetch('/kanban', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newCard)
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseCard) => {
+        return dispatch({
+          type: ADD_CARD,
+          payload: responseCard
+        });
+      })
+  }
 };
 
 export function selectCard(cardData) {
@@ -30,10 +42,24 @@ export function deleteCard(cardId) {
 };
 
 export function editCard(cardData) {
-  return {
-    type: EDIT_CARD,
-    payload: cardData
-  };
+  return (dispatch) => {
+    return fetch(`/kanban/${cardData.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(cardData)
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseCard) => {
+        return dispatch({
+          type: EDIT_CARD,
+          payload: responseCard
+        });
+      })
+  }
 };
 
 export function updateStatus(cardData) {

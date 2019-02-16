@@ -13,8 +13,8 @@ class AddCard extends Component {
       body: '',
       priority_id: 4,
       status_id: 1,
-      created_by: 0,
-      assigned_to: 0
+      created_by: 1,
+      assigned_to: 1
     };
 
     this.handleTitleOnChange = this.handleTitleOnChange.bind(this);
@@ -66,14 +66,6 @@ class AddCard extends Component {
       assigned_to
     });
 
-    this.setState({
-      title: '',
-      body: '',
-      priority_id: 4,
-      status_id: 1,
-      created_by: 0,
-      assigned_to: 0
-    });
     this.props.showCard();
     this.props.close();
   };

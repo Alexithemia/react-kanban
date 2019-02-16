@@ -1,7 +1,5 @@
 import { ADD_CARD, SELECT_CARD, DELETE_CARD, EDIT_CARD, STATUS_CARD, LOAD_START, LOAD_USERS } from '../actions';
 
-let payloadId = 5;
-
 const initialState = {
   cards: [],
   users: []
@@ -22,6 +20,8 @@ const cardReducer = (state = initialState, action) => {
       return Object.assign({}, state, { cards: deleteState });
 
     case EDIT_CARD:
+      console.log(action.payload);
+
       let editState = state.cards.filter((card) => {
         return card.id !== action.payload.id;
       });
