@@ -114,7 +114,6 @@ export const loadLogin = () => {
 }
 
 export const loginUser = (user) => {
-  console.log(user)
   return (dispatch) => {
     return fetch('/login', {
       method: 'POST',
@@ -142,6 +141,8 @@ export const loginUser = (user) => {
 }
 
 export const registerUser = (user) => {
+  console.log(user);
+
   return (dispatch) => {
     return fetch('/register', {
       method: 'POST',

@@ -10,12 +10,14 @@ class Register extends Component {
     this.state = {
       first_name: '',
       last_name: '',
+      email: '',
       username: '',
       password: ''
     };
 
     this.handleFirstNameOnChange = this.handleFirstNameOnChange.bind(this);
     this.handleLastNameOnChange = this.handleLastNameOnChange.bind(this);
+    this.handleEmailOnChange = this.handleEmailOnChange.bind(this);
     this.handleUsernameOnChange = this.handleUsernameOnChange.bind(this);
     this.handlePasswordOnChange = this.handlePasswordOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -44,6 +46,11 @@ class Register extends Component {
     this.setState({ username: value });
   };
 
+  handleEmailOnChange(e) {
+    const value = e.target.value;
+    this.setState({ email: value });
+  };
+
   handlePasswordOnChange(e) {
     const value = e.target.value;
     this.setState({ password: value });
@@ -51,11 +58,12 @@ class Register extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const { first_name, last_name, username, password } = this.state;
+    const { first_name, last_name, email, username, password } = this.state;
 
     this.props.onSend({
       first_name,
       last_name,
+      email,
       username,
       password
     });
@@ -79,6 +87,8 @@ class Register extends Component {
           <input type="text" data-type="first_name" onChange={this.handleFirstNameOnChange} value={this.state.first_name} />
           Last Name:
           <input type="text" data-type="last_name" onChange={this.handleLastNameOnChange} value={this.state.last_name} />
+          Email:
+          <input type="text" data-type="email" onChange={this.handleEmailOnChange} value={this.state.email} />
           Username:
           <input type="text" data-type="username" onChange={this.handleUsernameOnChange} value={this.state.username} />
           Password:

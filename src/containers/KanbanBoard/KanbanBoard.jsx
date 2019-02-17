@@ -50,12 +50,22 @@ class KanbanBoard extends Component {
 
   showLogin = () => {
     this.setState(prevState => {
-      return { loginOpen: !prevState.addFormOpen };
+      return { loginOpen: !prevState.loginOpen };
     });
   };
 
   closeLogin = () => {
     this.setState({ loginOpen: false });
+  };
+
+  showRegister = () => {
+    this.setState(prevState => {
+      return { registerOpen: !prevState.registerOpen };
+    });
+  };
+
+  closeRegister = () => {
+    this.setState({ registerOpen: false });
   };
 
   render() {

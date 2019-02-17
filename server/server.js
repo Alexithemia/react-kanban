@@ -49,8 +49,6 @@ passport.deserializeUser((user, done) => {
 });
 
 passport.use(new LocalStrategy(function (username, password, done) {
-  console.log(username, password);
-
   return new User({ username: username })
     .fetch()
     .then((user) => {
@@ -75,8 +73,6 @@ passport.use(new LocalStrategy(function (username, password, done) {
 }));
 
 app.post('/register', (req, res) => {
-  console.log('hit register', req.body);
-
   bcrypt.genSalt(saltRounds, (err, salt) => {
     if (err) { console.log(err); }
     bcrypt.hash(req.body.password, salt, (err, hash) => {
