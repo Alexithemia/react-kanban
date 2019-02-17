@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Login.scss';
+import './Register.scss';
 import { connect } from 'react-redux';
 import { registerUser } from '../../actions';
 

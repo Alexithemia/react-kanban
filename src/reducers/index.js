@@ -1,4 +1,16 @@
-import { ADD_CARD, SELECT_CARD, DELETE_CARD, EDIT_CARD, STATUS_CARD, LOAD_CARDS, LOAD_USERS } from '../actions';
+import {
+  ADD_CARD,
+  SELECT_CARD,
+  DELETE_CARD,
+  EDIT_CARD,
+  STATUS_CARD,
+  LOAD_CARDS,
+  LOAD_USERS,
+  LOAD_LOGIN,
+  LOGIN_USER,
+  REGISTER_USER,
+  LOGOUT_USER
+} from '../actions';
 
 const initialState = {
   cards: [],
@@ -37,6 +49,14 @@ const cardReducer = (state = initialState, action) => {
       return Object.assign({}, state, action.payload);
     case LOAD_USERS:
       return Object.assign({}, state, { users: action.payload.users });
+    case LOAD_LOGIN:
+      return Object.assign({}, state, { loggedIn: localStorage.getItem('logged_in'), userId: localStorage.getItem('userId') });
+    case LOGIN_USER:
+      return Object.assign({}, state, { loggedIn: action.payload.success, userId: action.payload.id });
+    case REGISTER_USER:
+      return state;
+    case LOGOUT_USER:
+      return state;
     default:
       return state;
   };

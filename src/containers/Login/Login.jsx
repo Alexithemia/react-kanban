@@ -57,7 +57,7 @@ class Login extends Component {
   render() {
     return (
       <div className='loginUser' ref={node => this.node = node}>
-        <h3>Add Card</h3>
+        <h3>Login</h3>
         <form className='loginForm'>
           Username:
           <input type="text" data-type="username" onChange={this.handleUsernameOnChange} value={this.state.username} />
@@ -67,6 +67,7 @@ class Login extends Component {
             Login
           </button>
         </form>
+        <button onClick={this.props.registerUser}>Create account?</button>
       </div>
     );
   };

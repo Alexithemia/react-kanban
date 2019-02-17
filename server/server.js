@@ -49,15 +49,16 @@ passport.deserializeUser((user, done) => {
 });
 
 passport.use(new LocalStrategy(function (username, password, done) {
+  console.log(username, password);
+
   return new User({ username: username })
     .fetch()
     .then((user) => {
-      user = user.toJSON();
-
       if (user === null) {
         return done(null, false, { message: 'bad username or password' });
       }
       else {
+        user = user.toJSON();
         bcrypt.compare(password, user.password)
           .then((res) => {
             if (res) { return done(null, user); }
@@ -74,6 +75,8 @@ passport.use(new LocalStrategy(function (username, password, done) {
 }));
 
 app.post('/register', (req, res) => {
+  console.log('hit register', req.body);
+
   bcrypt.genSalt(saltRounds, (err, salt) => {
     if (err) { console.log(err); }
     bcrypt.hash(req.body.password, salt, (err, hash) => {
@@ -98,7 +101,7 @@ app.post('/register', (req, res) => {
 });
 
 app.post('/login', passport.authenticate('local'), function (req, res) {
-  res.json({ success: true });
+  res.json({ success: true, id: req.user.id });
 });
 
 app.get('/logout', isAuthenticated, (req, res) => {

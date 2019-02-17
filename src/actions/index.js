@@ -5,6 +5,10 @@ export const EDIT_CARD = 'EDIT_CARD';
 export const STATUS_CARD = 'STATUS_CARD';
 export const LOAD_CARDS = 'LOAD_CARDS';
 export const LOAD_USERS = 'LOAD_USERS';
+export const LOAD_LOGIN = 'LOAD_LOGIN';
+export const LOGIN_USER = 'LOGIN_USER';
+export const REGISTER_USER = 'REGISTER_USER';
+export const LOGOUT_USER = 'LOGOUT_USER';
 
 export function addCard(newCard) {
   return (dispatch) => {
@@ -97,6 +101,64 @@ export const loadUsers = () => {
         return dispatch({
           type: LOAD_USERS,
           payload: users
+        })
+      })
+  }
+}
+
+export const loadLogin = () => {
+  return {
+    type: LOAD_LOGIN,
+    payload: ''
+  };
+}
+
+export const loginUser = (user) => {
+  console.log(user)
+  return (dispatch) => {
+    return fetch('/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+      })
+      .then((body) => {
+        if (body) {
+          localStorage.setItem('logged_in', true);
+          localStorage.setItem('userId', body.id);
+          return dispatch({
+            type: LOGIN_USER,
+            payload: body
+          })
+        }
+      })
+  }
+}
+
+export const registerUser = (user) => {
+  return (dispatch) => {
+    return fetch('/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((body) => {
+        console.log(body);
+
+        return dispatch({
+          type: REGISTER_USER,
+          payload: ''
         })
       })
   }

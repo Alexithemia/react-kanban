@@ -13,7 +13,9 @@ class KanbanBoard extends Component {
   state = {
     addFormOpen: false,
     detailOpen: false,
-    editFormOpen: false
+    editFormOpen: false,
+    loginOpen: false,
+    registerOpen: false
   };
 
   toggleForm = () => {
@@ -46,6 +48,16 @@ class KanbanBoard extends Component {
     this.setState({ detailOpen: false });
   };
 
+  showLogin = () => {
+    this.setState(prevState => {
+      return { loginOpen: !prevState.addFormOpen };
+    });
+  };
+
+  closeLogin = () => {
+    this.setState({ loginOpen: false });
+  };
+
   render() {
     let queue = [];
     let inProgress = [];
@@ -69,7 +81,7 @@ class KanbanBoard extends Component {
 
     return (
       <>
-        <Header title='Kanban' show={this.toggleForm} />
+        <Header title='Kanban' show={this.toggleForm} login={this.showLogin} />
 
         <div className="kanbanContainer">
 
@@ -85,7 +97,7 @@ class KanbanBoard extends Component {
 
           {this.state.editFormOpen ? <EditCard users={this.props.users} card={this.props.selectedCard} closeEdit={this.closeEdit} /> : null}
 
-          {this.state.loginOpen ? <Login closeLogin={this.closeLogin} /> : null}
+          {this.state.loginOpen ? <Login closeLogin={this.closeLogin} registerUser={this.showRegister} /> : null}
 
           {this.state.registerOpen ? <Register closeRegister={this.closeRegister} /> : null}
 
@@ -99,7 +111,8 @@ const mapStateToProps = (state) => {
   return {
     cards: state.cards,
     selectedCard: state.selectedCard,
-    users: state.users
+    users: state.users,
+    userId: state.userId
   };
 };
 

@@ -1,2 +1,2 @@
-import AddCard from './AddCard';
-export default AddCard;
+import Register from './Register';
+export default Register;

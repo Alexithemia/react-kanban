@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.scss';
 import KanbanBoard from '../KanbanBoard';
-import { loadCards, loadUsers } from '../../actions';
+import { loadCards, loadUsers, loadLogin } from '../../actions';
 import { connect } from 'react-redux';
 
 
@@ -30,7 +30,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     loadStart: () => {
       dispatch(loadCards());
-      dispatch(loadUsers())
+      dispatch(loadUsers());
+      dispatch(loadLogin());
     }
   };
 };
