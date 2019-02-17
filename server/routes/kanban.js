@@ -11,7 +11,7 @@ function isAuthenticated(req, res, next) {
 }
 
 router.route('/')
-  .post(function (req, res) { //make card
+  .post(isAuthenticated, function (req, res) { //make card
     Card.forge({
       title: req.body.title,
       body: req.body.body,
@@ -68,7 +68,7 @@ router.route('/users')
   });
 
 router.route('/:id')
-  .put(function (req, res) { //update card
+  .put(isAuthenticated, function (req, res) { //update card
     Card.where('id', req.params.id).save({
       title: req.body.title,
       body: req.body.body,
@@ -97,7 +97,7 @@ router.route('/:id')
         res.status(500).json({ success: false, error: err });
       });
   })
-  .delete(function (req, res) { //delete card
+  .delete(isAuthenticated, function (req, res) { //delete card
     new Card({ id: req.params.id }).destroy()
       .then(function () {
         res.json({ success: true });

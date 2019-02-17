@@ -141,8 +141,6 @@ export const loginUser = (user) => {
 }
 
 export const registerUser = (user) => {
-  console.log(user);
-
   return (dispatch) => {
     return fetch('/register', {
       method: 'POST',
@@ -159,6 +157,21 @@ export const registerUser = (user) => {
 
         return dispatch({
           type: REGISTER_USER,
+          payload: ''
+        })
+      })
+  }
+}
+
+export const logoutUser = () => {
+  return (dispatch) => {
+    return fetch('/logout')
+      .then((response) => {
+        return response.json();
+      })
+      .then(() => {
+        return dispatch({
+          type: LOGOUT_USER,
           payload: ''
         })
       })

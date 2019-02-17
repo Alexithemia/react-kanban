@@ -56,7 +56,7 @@ const cardReducer = (state = initialState, action) => {
     case REGISTER_USER:
       return state;
     case LOGOUT_USER:
-      return state;
+      return Object.assign({}, state, { loggedIn: false, userId: null });
     default:
       return state;
   };

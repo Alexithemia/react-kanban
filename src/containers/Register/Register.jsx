@@ -92,7 +92,7 @@ class Register extends Component {
           Username:
           <input type="text" data-type="username" onChange={this.handleUsernameOnChange} value={this.state.username} />
           Password:
-          <input type="text" data-type="password" onChange={this.handlePasswordOnChange} value={this.state.password} />
+          <input type="password" data-type="password" onChange={this.handlePasswordOnChange} value={this.state.password} />
           <button onClick={this.handleSubmit}>
             Register
           </button>

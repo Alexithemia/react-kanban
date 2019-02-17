@@ -72,10 +72,10 @@ class CardDetail extends Component {
         <div className="body">{body}</div>
         <div className="assigned">Assigned to: {assignedUser}</div>
         <div className="created">Created By: {createdByUser}</div>
-        <div className="optionBox">
+        {this.props.loggedIn ? <div className="optionBox">
           <div className="option" onClick={this.deleteClick}>Delete</div>
           <div className="option" onClick={this.props.showEdit}>Edit</div>
-        </div>
+        </div> : null}
       </div>
     );
   };
