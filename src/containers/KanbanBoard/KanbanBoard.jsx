@@ -94,12 +94,13 @@ class KanbanBoard extends Component {
         <Header title='Kanban' show={this.toggleForm} login={this.showLogin} />
 
         <div className="kanbanContainer">
+          <div className="columnContainer">
+            <StatusSection title='Queue' cards={queue} showCard={this.toggleDetail} />
 
-          <StatusSection title='Queue' cards={queue} showCard={this.toggleDetail} />
+            <StatusSection title='In_Progress' cards={inProgress} showCard={this.toggleDetail} />
 
-          <StatusSection title='In_Progress' cards={inProgress} showCard={this.toggleDetail} />
-
-          <StatusSection title='Completed' cards={completed} showCard={this.toggleDetail} />
+            <StatusSection title='Completed' cards={completed} showCard={this.toggleDetail} />
+          </div>
 
           {this.state.addFormOpen ? <AddCard users={this.props.users} close={this.closeForm} showCard={this.toggleDetail} /> : null}
 

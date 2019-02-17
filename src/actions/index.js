@@ -153,8 +153,6 @@ export const registerUser = (user) => {
         return response.json();
       })
       .then((body) => {
-        console.log(body);
-
         return dispatch({
           type: REGISTER_USER,
           payload: ''
@@ -170,6 +168,8 @@ export const logoutUser = () => {
         return response.json();
       })
       .then(() => {
+        localStorage.removeItem('logged_in');
+        localStorage.removeItem('userId');
         return dispatch({
           type: LOGOUT_USER,
           payload: ''
