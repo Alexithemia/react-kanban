@@ -18,6 +18,14 @@ class KanbanBoard extends Component {
     registerOpen: false
   };
 
+  shouldBlur = () => {
+    const { addFormOpen, detailOpen, editFormOpen, loginOpen, registerOpen } = this.state
+    if (addFormOpen || detailOpen || editFormOpen || loginOpen || registerOpen) {
+      return true;
+    };
+    return false;
+  }
+
   toggleForm = () => {
     this.setState(prevState => {
       return { addFormOpen: !prevState.addFormOpen };
@@ -94,7 +102,7 @@ class KanbanBoard extends Component {
         <Header title='Kanban' show={this.toggleForm} login={this.showLogin} />
 
         <div className="kanbanContainer">
-          <div className="columnContainer">
+          <div className={`columnContainer ${this.shouldBlur() ? 'blur' : ''}`}>
             <StatusSection title='Queue' cards={queue} showCard={this.toggleDetail} />
 
             <StatusSection title='In_Progress' cards={inProgress} showCard={this.toggleDetail} />

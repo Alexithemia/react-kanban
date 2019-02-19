@@ -6,12 +6,10 @@ import { deleteCard, editCard } from '../../actions';
 class CardDetail extends Component {
   componentWillMount() {
     document.addEventListener('mousedown', this.handleClick, false);
-    document.querySelector('.columnContainer').classList.add('blur');
   };
 
   componentWillUnmount() {
     document.removeEventListener('mousedown', this.handleClick, false);
-    document.querySelector('.columnContainer').classList.remove('blur');
   };
 
   handleClick = (e) => {

@@ -25,12 +25,10 @@ class Register extends Component {
 
   componentWillMount() {
     document.addEventListener('mousedown', this.handleClick, false);
-    document.querySelector('.columnContainer').classList.add('blur');
   };
 
   componentWillUnmount() {
     document.removeEventListener('mousedown', this.handleClick, false);
-    document.querySelector('.columnContainer').classList.remove('blur');
   };
 
   handleFirstNameOnChange(e) {

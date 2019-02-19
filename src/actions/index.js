@@ -5,7 +5,6 @@ export const EDIT_CARD = 'EDIT_CARD';
 export const STATUS_CARD = 'STATUS_CARD';
 export const LOAD_CARDS = 'LOAD_CARDS';
 export const LOAD_USERS = 'LOAD_USERS';
-export const LOAD_LOGIN = 'LOAD_LOGIN';
 export const LOGIN_USER = 'LOGIN_USER';
 export const REGISTER_USER = 'REGISTER_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
@@ -104,13 +103,6 @@ export const loadUsers = () => {
         })
       })
   }
-}
-
-export const loadLogin = () => {
-  return {
-    type: LOAD_LOGIN,
-    payload: ''
-  };
 }
 
 export const loginUser = (user) => {
