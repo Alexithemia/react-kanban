@@ -30,7 +30,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     loadStart: () => {
       dispatch(loadCards());
-      dispatch(loadUsers())
+      dispatch(loadUsers());
     }
   };
 };

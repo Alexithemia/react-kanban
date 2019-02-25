@@ -13,7 +13,7 @@ class AddCard extends Component {
       body: '',
       priority_id: 4,
       status_id: 1,
-      created_by: 1,
+      created_by: this.props.userId,
       assigned_to: 1
     };
 
@@ -105,7 +105,9 @@ class AddCard extends Component {
 };
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    userId: state.userId
+  };
 }
 const mapDispatchToProps = (dispatch) => {
   return {

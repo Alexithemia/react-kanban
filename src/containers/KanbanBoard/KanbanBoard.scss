@@ -1,4 +1,7 @@
-.kanbanContainer{
+.columnContainer{
   display: flex;
   flex-flow: row nowrap;
+}
+.blur{
+  filter: opacity(30%);
 }
