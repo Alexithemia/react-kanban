@@ -60,19 +60,22 @@ class CardDetail extends Component {
     }
   };
 
+  userCheck = () => {
+    return ((this.props.userId === this.props.card.created_by) || (this.props.userId === this.props.card.assigned_to));
+  }
 
   render() {
-    const { title, body, priority_id, status_id, createdByUser, assignedUser } = this.props.card;
+    const { title, body, priority_id, status_id, created_by, createdByUser, assignedUser } = this.props.card;
     const classDetail = `cardDetail priority${priority_id}`
     const statusDetail = `status status${status_id}`
     return (
       <div className={classDetail} ref={node => this.node = node}>
-        <div className={statusDetail} onClick={this.statusClick}></div>
+        <div className={statusDetail} onClick={this.userCheck() ? this.statusClick : null}></div>
         <div className="title">{title}</div>
         <div className="body">{body}</div>
         <div className="assigned">Assigned to: {assignedUser}</div>
         <div className="created">Created By: {createdByUser}</div>
-        {this.props.loggedIn ? <div className="optionBox">
+        {this.props.userId === created_by ? <div className="optionBox">
           <div className="option" onClick={this.deleteClick}>Delete</div>
           <div className="option" onClick={this.props.showEdit}>Edit</div>
         </div> : null}
@@ -82,7 +85,10 @@ class CardDetail extends Component {
 };
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    userId: state.userId,
+    loggedIn: state.loggedIn
+  };
 }
 const mapDispatchToProps = (dispatch) => {
   return {

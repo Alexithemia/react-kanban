@@ -19,11 +19,8 @@ class KanbanBoard extends Component {
   };
 
   shouldBlur = () => {
-    const { addFormOpen, detailOpen, editFormOpen, loginOpen, registerOpen } = this.state
-    if (addFormOpen || detailOpen || editFormOpen || loginOpen || registerOpen) {
-      return true;
-    };
-    return false;
+    const { addFormOpen, detailOpen, editFormOpen, loginOpen, registerOpen } = this.state;
+    return (addFormOpen || detailOpen || editFormOpen || loginOpen || registerOpen);
   }
 
   toggleForm = () => {
@@ -112,7 +109,7 @@ class KanbanBoard extends Component {
 
           {this.state.addFormOpen ? <AddCard users={this.props.users} close={this.closeForm} showCard={this.toggleDetail} /> : null}
 
-          {this.state.detailOpen ? <CardDetail loggedIn={this.props.loggedIn} card={this.props.selectedCard} closeCard={this.closeDetail} showEdit={this.toggleEdit} /> : null}
+          {this.state.detailOpen ? <CardDetail card={this.props.selectedCard} closeCard={this.closeDetail} showEdit={this.toggleEdit} /> : null}
 
           {this.state.editFormOpen ? <EditCard users={this.props.users} card={this.props.selectedCard} closeEdit={this.closeEdit} /> : null}
 
@@ -131,7 +128,6 @@ const mapStateToProps = (state) => {
     cards: state.cards,
     selectedCard: state.selectedCard,
     users: state.users,
-    loggedIn: state.loggedIn
   };
 };
 

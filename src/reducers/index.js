@@ -15,7 +15,7 @@ const initialState = {
   cards: [],
   users: [],
   loggedIn: localStorage.getItem('logged_in'),
-  userId: localStorage.getItem('userId')
+  userId: parseInt(localStorage.getItem('userId'))
 }
 
 const cardReducer = (state = initialState, action) => {
