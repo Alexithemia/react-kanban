@@ -115,9 +115,10 @@ export const loginUser = (user) => {
       body: JSON.stringify(user)
     })
       .then((response) => {
-        if (response.ok) {
-          return response.json();
+        if (!response.ok) {
+          throw Error(response.statusText)
         }
+        return response.json();
       })
       .then((body) => {
         if (body) {
@@ -128,6 +129,10 @@ export const loginUser = (user) => {
             payload: body
           })
         }
+      })
+      .catch((err) => {
+        console.log(err);
+
       })
   }
 }
